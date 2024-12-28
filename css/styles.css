@@ -1,0 +1,565 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0d0c22;
+    color: white;
+}
+
+/* Header */
+.header {
+    height: 120px; /* Explicit height */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #1a1a2e;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    transition: background-color 0.3s;
+    box-sizing: border-box; /* Ensure padding is included in height */
+}
+
+.header.sticky {
+    background-color: #252540;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.header-right{
+    position: relative;
+        display: inline-block;
+        margin-bottom: 20px;
+        text-align: center;   
+}
+.header-right a {
+    display: inline-block;
+    text-decoration: none; /* Removes underline */
+    color: white; /* Sets text color to white */
+    font-weight: bold; /* Optional: Makes the text bold */
+}
+.header-right a:hover{
+    text-decoration: underline;
+}
+
+/* Main Profile Image */
+.main-profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    margin-bottom: 10px;
+}
+
+/* Preview Box */
+.preview-box {
+    position: relative;
+    margin-top: 20px;
+    border: 2px dashed #999;
+    padding: 10px;
+    width: 180px;
+    height: auto;
+    background-color: #f9f9f9;
+    display: none; /* Hidden initially */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Preview image */
+.preview-box img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Always-visible File Label */
+.custom-file-label {
+    display: inline-block;
+    background-color: #252540;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Adjust label text alignment */
+.custom-file-label:focus {
+    outline: none;
+    box-shadow: 0 0 2px 2px #007bff;
+}
+
+/* Hover effect for the label */
+.custom-file-label:hover {
+    background-color: #2a2a52;
+}
+/* Hide the default file input */
+.header-right input[type="file"] {
+    display: none;
+}
+
+/* Upload button inside the preview box */
+.upload-btn {
+    background-color: #252540;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.upload-btn:hover {
+    background-color: #2a2a52;
+}
+
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 120px; /* Matches the header's height */
+    left: 0;
+    height: calc(100vh - 60px); /* Adjusted to occupy the remaining viewport height */
+    width: 200px;
+    background-color: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Include padding in dimensions */
+}
+
+.navbar button {
+    background-color: #252540;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.navbar button a {
+    color: white;
+    text-decoration: none; /* Removes underline */
+}
+
+.navbar button:hover {
+    background-color: #2a2a52;
+}
+
+/* Ensure buttons with the active class are styled */
+.navbar button.active {
+    background-color: #9966FF;
+    color: white;
+    font-weight: bold;
+}
+
+/* Ensure nested links in buttons also inherit styles */
+ 
+.navbar button a:hover {
+    color: #f1c40f; /* Optional: Change color on hover */
+    text-decoration: underline; /* Optional: Add underline on hover */
+}
+/* Dashboard */
+.dashboard {
+    margin-left: 200px; /* Matches the navbar's width */
+    margin-top: 60px; /* Adds space equal to the header's height */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in dimensions */
+}
+.form-container {
+    max-width: 300px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    color: #0d0c22 ;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2{
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-container label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.form-container input,
+.form-container textarea,
+.form-container select,
+.form-container button {
+    width: 95%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.form-container select,
+.form-container button {
+    width: 100%;
+    
+}
+
+.form-container textarea {
+    resize: vertical;
+}
+
+.form-container button {
+    background-color: #252540;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #9966FF;
+}
+
+.error-messages {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.error-messages ul {
+    list-style: none;
+    padding: 0;
+}
+
+.error-messages li {
+    margin-bottom: 5px;
+}
+
+/* h1, h2 {
+    color: #333;
+} */
+
+.statistics-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-sizing: border-box; /* Maintain consistent spacing */
+}
+
+.chart-container {
+    width: 400px;
+    height: 300px;
+    background: #252540;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.task-tables {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.task-table {
+    background-color: #1a1a2e;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.task-table h2 {
+    margin-top: 0;
+}
+
+.task-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.task-table th, 
+.task-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #252540;
+}
+
+/* Table Header Styles */
+.task-table th {
+    background-color: #2a2a52;
+    color: white;
+}
+
+/* Allow content in these columns to wrap */
+.task-table td:nth-child(2), /* Section Name */
+.task-table td:nth-child(3), /* Task Name */
+.task-table td:nth-child(4) { /* Task Description */
+    white-space: normal; /* Allow wrapping */
+    word-wrap: break-word; /* Ensure long words break correctly */
+}
+
+/* Keep Deadline and Actions columns on one line */
+.task-table td:nth-child(5), /* Deadline */
+.task-table td:nth-child(6), /* Actions */
+.task-table th:nth-child(5), 
+.task-table th:nth-child(6) {
+    white-space: nowrap; /* Prevent wrapping */
+    text-align: center;
+}
+
+/* Buttons inside the Actions column */
+.action-btn {
+    display: inline-flex; /* Align icons and text */
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin: 2px; /* Spacing between buttons */
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Removes underline for <a> tags */
+    background-color: #252540;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-btn i {
+    margin-right: 5px; /* Space between icons and text */
+}
+
+/* Button Hover Effects */
+.action-btn:hover {
+    background-color: #383869;
+}
+
+/* Specific Button Colors */
+.btn-edit {
+    background-color: #4CAF50; /* Green for Edit */
+}
+
+.btn-edit:hover {
+    background-color: #45a049;
+}
+
+.btn-delete {
+    background-color: #f44336; /* Red for Delete */
+}
+
+.btn-delete:hover {
+    background-color: #e53935;
+}
+
+.btn-done {
+    background-color: #2196F3; /* Blue for Done */
+}
+
+.btn-done:hover {
+    background-color: #1e88e5;
+}
+
+.btn-processing {
+    background-color: #FFC107; /* Amber for Processing */
+    color: black;
+}
+
+.btn-processing:hover {
+    background-color: #FFB300;
+}
+
+/* Responsive Design */
+
+/*For Tablets screens */
+@media screen and (max-width: 1024px) {
+    .header {
+        flex-wrap: wrap; /* Allow content to wrap */
+        height: auto; /* Adjust height dynamically */
+        padding: 10px;
+        justify-content: center; /* Center contents */
+    }
+
+    .header-left {
+        flex: 1 1 100%; /* Full-width */
+        text-align: center; /* Center align text */
+        margin-bottom: 10px;
+    }
+
+    .header-right {
+        flex: 1 1 100%; /* Full-width */
+        text-align: center;
+        align-items: center;
+    }
+
+    .main-profile img {
+        width: 45px; /* Slightly smaller profile image */
+        height: 45px;
+    }
+
+    .preview-box {
+        max-width: 160px; /* Adjust preview box size */
+    }
+
+    .navbar {
+        position: relative; /* Change to relative for better stacking on smaller screens */
+        top: 0; /* Remove the fixed position for a smooth layout */
+        width: 100%; /* Make the navbar span the full width */
+        height: auto; /* Allow it to expand based on content */
+        margin-top: 10px;
+    }
+
+    .dashboard {
+        margin-left: 0; /* Remove the margin caused by the navbar */
+        margin-top: 70px; /* Space below the header */
+        padding: 15px;
+    }
+
+    .statistics-section .chart-container {
+        width: 100%; /* Adjust to fill the available space */
+    }
+
+    /* Tablet Screens */
+    .task-tables {
+        gap: 15px;
+        margin-top: 10px; /* Reduce the margin for smaller screens */
+    }
+
+    .task-tables .task-table {
+        padding: 8px;
+        overflow-x: auto; /* Add horizontal scrolling for smaller screens */
+    }
+
+    /* Reduce font sizes and spacing for better fit */
+    .task-table th, 
+    .task-table td {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    /* Allow long text to wrap in smaller screens */
+    .task-table td:nth-child(2), /* Section Name */
+    .task-table td:nth-child(3), /* Task Name */
+    .task-table td:nth-child(4) { /* Task Description */
+        white-space: normal;
+        word-wrap: break-word;
+    }
+
+    /* Ensure the Deadline and Actions columns stay on one line */
+    .task-table td:nth-child(5), /* Deadline */
+    .task-table td:nth-child(6) {
+        white-space: nowrap;
+        text-align: center;
+    }
+}
+
+/* For Mobile screens */
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column; /* Stack header contents */
+        align-items: center;
+        padding: 10px;
+    }
+
+    .header-left h1 {
+        font-size: 1.5rem; /* Smaller heading size */
+        margin-bottom: 5px;
+    }
+
+    .header-right {
+        flex-direction: column; /* Stack contents vertically */
+    }
+
+    .main-profile img {
+        width: 40px; /* Smaller profile image */
+        height: 40px;
+    }
+
+    .custom-file-label,
+    .upload-btn {
+        font-size: 0.9rem; /* Adjust font size for smaller buttons */
+        padding: 5px 10px;
+    }
+
+    .preview-box {
+        max-width: 150px; /* Further adjust preview box size */
+    }
+
+    .navbar {
+        flex-direction: column; /* Stack navbar items vertically */
+        gap: 10px;
+        width: 100%; /* Take the full width of the screen */
+        padding: 10px;
+    }
+    .file-upload-wrapper {
+        flex-direction: column; /* Stack label and button vertically */
+        gap: 5px;
+    }
+
+    .dashboard {
+        margin-left: 0; /* No horizontal margin on mobile */
+        margin-top: 70px; /* Ensure space below the header */
+        padding: 10px;
+    }
+
+    .statistics-section .chart-container {
+        width: 100%; /* Make the chart responsive */
+        height: 250px; /* Adjust the height for smaller screens */
+    }
+
+    /* Mobile Screens */
+    .task-tables {
+        gap: 10px;
+        margin-top: 5px;
+    }
+
+    .task-tables .task-table {
+        padding: 5px;
+        margin-bottom: 8px;
+    }
+
+    .task-table th, 
+    .task-table td {
+        padding: 6px;
+        font-size: 0.8rem; /* Further reduce font size for mobile screens */
+    }
+
+    /* Stack header content vertically */
+    .task-table {
+        display: block; /* Allow table to be scrollable horizontally */
+        overflow-x: auto; /* Add scrolling behavior */
+    }
+
+    /* Adjust button sizes for mobile */
+    .action-btn {
+        font-size: 0.7rem;
+        padding: 3px 5px;
+    }
+
+    .action-btn i {
+        font-size: 0.7rem; /* Reduce icon size */
+    }
+
+    /* Center-align buttons for better usability on small screens */
+    .task-table td:nth-child(6) {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+}
