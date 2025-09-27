@@ -10,11 +10,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-//To display the count of tasks in each category (read, processing, done), fetch the counts in PHP:
-$readCount = $conn->query("SELECT COUNT(*) AS count FROM tasks WHERE status = 'read' AND user_id = $user_id")->fetch_assoc()['count'];
-$processingCount = $conn->query("SELECT COUNT(*) AS count FROM tasks WHERE status = 'processing' AND user_id = $user_id")->fetch_assoc()['count'];
-$doneCount = $conn->query("SELECT COUNT(*) AS count FROM tasks WHERE status = 'done' AND user_id = $user_id")->fetch_assoc()['count'];
-
 // Fetch the logged-in user's profile image
 $user_query = $conn->query("SELECT profile_image FROM users WHERE id = $user_id");
 $user = $user_query->fetch_assoc();
@@ -148,36 +143,36 @@ $processing_tasks = $conn->query("SELECT tasks.*, sections.name AS section_name
                     </thead>
                     <tbody>
                         <?php if ($tasks->num_rows > 0): ?>
-                            <?php while ($task = $tasks->fetch_assoc()): ?>
-                                <tr id="task-<?= $task['id'] ?>">
-                                    <td><?= htmlspecialchars($task['id']) ?></td>
-                                    <td><?= htmlspecialchars($task['section_name']) ?></td>
-                                    <td><?= htmlspecialchars($task['title']) ?></td>
-                                    <td><?= htmlspecialchars($task['description']) ?></td>
-                                    <td><?= htmlspecialchars($task['due_date']) ?></td>
-                                    <td>
-                                        <a href="edit_task.php?id=<?= $task['id'] ?>" class="action-btn btn-edit">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="delete_task.php?id=<?= $task['id'] ?>&page=dashboard.php"
-                                            class="action-btn btn-delete">
-                                            <i class="fa fa-trash"></i></a>
-                                        </a>
-                                        <button class="action-btn btn-done" onclick="moveToDone(<?= $task['id'] ?>)">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                        <button class="action-btn btn-processing"
-                                            onclick="moveToProcessing(<?= $task['id'] ?>)">
-                                            <i class="fa fa-chalkboard"></i>
-                                        </button>
-                                    </td>
+                        <?php while ($task = $tasks->fetch_assoc()): ?>
+                        <tr id="task-<?= $task['id'] ?>">
+                            <td><?= htmlspecialchars($task['id']) ?></td>
+                            <td><?= htmlspecialchars($task['section_name']) ?></td>
+                            <td><?= htmlspecialchars($task['title']) ?></td>
+                            <td><?= htmlspecialchars($task['description']) ?></td>
+                            <td><?= htmlspecialchars($task['due_date']) ?></td>
+                            <td>
+                                <a href="edit_task.php?id=<?= $task['id'] ?>" class="action-btn btn-edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="delete_task.php?id=<?= $task['id'] ?>&page=dashboard.php"
+                                    class="action-btn btn-delete">
+                                    <i class="fa fa-trash"></i></a>
+                                </a>
+                                <button class="action-btn btn-done" onclick="moveToDone(<?= $task['id'] ?>)">
+                                    <i class="fa fa-check"></i>
+                                </button>
+                                <button class="action-btn btn-processing"
+                                    onclick="moveToProcessing(<?= $task['id'] ?>)">
+                                    <i class="fa fa-chalkboard"></i>
+                                </button>
+                            </td>
 
-                                </tr>
-                            <?php endwhile; ?>
+                        </tr>
+                        <?php endwhile; ?>
                         <?php else: ?>
-                            <tr>
-                                <td colspan="6">No tasks found.</td>
-                            </tr>
+                        <tr>
+                            <td colspan="6">No tasks found.</td>
+                        </tr>
                         <?php endif; ?>
                     </tbody>
                 </table>
@@ -198,18 +193,18 @@ $processing_tasks = $conn->query("SELECT tasks.*, sections.name AS section_name
                     </thead>
                     <tbody>
                         <?php while ($task = $processing_tasks->fetch_assoc()): ?>
-                            <tr id="processing-task-<?= $task['id'] ?>">
-                                <td><?= htmlspecialchars($task['id']) ?></td>
-                                <td><?= htmlspecialchars($task['section_name']) ?></td>
-                                <td><?= htmlspecialchars($task['title']) ?></td>
-                                <td><?= htmlspecialchars($task['description']) ?></td>
-                                <td><?= htmlspecialchars($task['due_date']) ?></td>
-                                <td>
-                                    <button class="action-btn btn-done" onclick="moveToDone(<?= $task['id'] ?>)">
-                                        <i class="fa fa-check"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                        <tr id="processing-task-<?= $task['id'] ?>">
+                            <td><?= htmlspecialchars($task['id']) ?></td>
+                            <td><?= htmlspecialchars($task['section_name']) ?></td>
+                            <td><?= htmlspecialchars($task['title']) ?></td>
+                            <td><?= htmlspecialchars($task['description']) ?></td>
+                            <td><?= htmlspecialchars($task['due_date']) ?></td>
+                            <td>
+                                <button class="action-btn btn-done" onclick="moveToDone(<?= $task['id'] ?>)">
+                                    <i class="fa fa-check"></i>
+                                </button>
+                            </td>
+                        </tr>
                         <?php endwhile; ?>
                     </tbody>
                 </table>
@@ -230,19 +225,19 @@ $processing_tasks = $conn->query("SELECT tasks.*, sections.name AS section_name
                     </thead>
                     <tbody>
                         <?php while ($task = $done_tasks->fetch_assoc()): ?>
-                            <tr id="done-task-<?= $task['id'] ?>">
-                                <td><?= htmlspecialchars($task['id']) ?></td>
-                                <td><?= htmlspecialchars($task['section_name']) ?></td>
-                                <td><?= htmlspecialchars($task['title']) ?></td>
-                                <td><?= htmlspecialchars($task['description']) ?></td>
-                                <td><?= htmlspecialchars($task['due_date']) ?></td>
-                                <td>
-                                    <a href="delete_task.php?id=<?= $task['id'] ?>&page=dashboard.php"
-                                        class="action-btn btn-delete">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                        <tr id="done-task-<?= $task['id'] ?>">
+                            <td><?= htmlspecialchars($task['id']) ?></td>
+                            <td><?= htmlspecialchars($task['section_name']) ?></td>
+                            <td><?= htmlspecialchars($task['title']) ?></td>
+                            <td><?= htmlspecialchars($task['description']) ?></td>
+                            <td><?= htmlspecialchars($task['due_date']) ?></td>
+                            <td>
+                                <a href="delete_task.php?id=<?= $task['id'] ?>&page=dashboard.php"
+                                    class="action-btn btn-delete">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
                         <?php endwhile; ?>
                     </tbody>
                 </table>
@@ -251,177 +246,177 @@ $processing_tasks = $conn->query("SELECT tasks.*, sections.name AS section_name
     </main>
 
     <script>
-        // Fetch dynamic data from the server
-        async function fetchTaskStatistics() {
-            try {
-                const response = await fetch('get-task-statistics.php'); // Replace with your PHP script URL
-                const data = await response.json();
-                if (data.error) {
-                    console.error(data.error);
-                    return null;
-                }
-                return data;
-            } catch (error) {
-                console.error("Error fetching task statistics:", error);
+    // Fetch dynamic data from the server
+    async function fetchTaskStatistics() {
+        try {
+            const reponse = await fetch('get-task-statistics.php'); // Replace with your PHP script URL
+            const data = await sresponse.json();
+            if (data.error) {
+                console.error(data.error);
                 return null;
             }
+            return data;
+        } catch (error) {
+            console.error("Error fetching task statistics:", error);
+            return null;
+        }
+    }
+
+    // Initialize Chart.js after fetching data
+    async function initializeChart() {
+        const taskStats = await fetchTaskStatistics();
+
+        if (!taskStats) {
+            console.error("Failed to fetch task statistics.");
+            return;
         }
 
-        // Initialize Chart.js after fetching data
-        async function initializeChart() {
-            const taskStats = await fetchTaskStatistics();
-
-            if (!taskStats) {
-                console.error("Failed to fetch task statistics.");
-                return;
-            }
-
-            // Extract counts from the dynamic data
-            const {
-                read,
-                processing,
-                done
-            } = taskStats;
+        // Extract counts from the dynamic data
+        const {
+            read,
+            processing,
+            done
+        } = taskStats;
 
 
-            // Create the chart
-            const ctx = document.getElementById('doughnutChart').getContext('2d');
-            const doughnutChart = new Chart(ctx, {
-                type: 'doughnut', // Doughnut chart type
-                data: {
-                    labels: ['Read', 'Processing', 'Done'], // Data labels
-                    datasets: [{
-                        label: 'Task Statistics',
-                        data: [read, processing, done], // Dynamic counts
-                        backgroundColor: [
-                            'rgba(75, 192, 192, 1)', // Read
-                            'rgba(255, 206, 86, 1)', // Processing
-                            'rgba(153, 102, 255, 1)' // Done
-                        ],
-                        borderColor: [
-                            'rgba(255, 255, 255, 1)', // White border for contrast
-                            'rgba(255, 255, 255, 1)',
-                            'rgba(255, 255, 255, 1)'
-                        ],
-                        borderWidth: 2 // Set border width for distinction
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top', // Position the legend at the top
-                            labels: {
-                                color: 'white', // White text in the legend
-                                font: {
-                                    size: 14 // Optional: Adjust font size
-                                }
+        // Create the chart
+        const ctx = document.getElementById('doughnutChart').getContext('2d');
+        const doughnutChart = new Chart(ctx, {
+            type: 'doughnut', // Doughnut chart type
+            data: {
+                labels: ['Read', 'Processing', 'Done'], // Data labels
+                datasets: [{
+                    label: 'Task Statistics',
+                    data: [read, processing, done], // Dynamic counts
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 1)', // Read
+                        'rgba(255, 206, 86, 1)', // Processing
+                        'rgba(153, 102, 255, 1)' // Done
+                    ],
+                    borderColor: [
+                        'rgba(255, 255, 255, 1)', // White border for contrast
+                        'rgba(255, 255, 255, 1)',
+                        'rgba(255, 255, 255, 1)'
+                    ],
+                    borderWidth: 2 // Set border width for distinction
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top', // Position the legend at the top
+                        labels: {
+                            color: 'white', // White text in the legend
+                            font: {
+                                size: 14 // Optional: Adjust font size
                             }
-                        },
-                        tooltip: {
-                            bodyColor: 'white', // White text in tooltips
-                            titleColor: 'white', // Optional: White title text
-                            backgroundColor: 'rgba(0, 0, 0, 0.7)', // Optional: Black tooltip background
-                            borderColor: '#FFFFFF',
-                            borderWidth: 1
                         }
+                    },
+                    tooltip: {
+                        bodyColor: 'white', // White text in tooltips
+                        titleColor: 'white', // Optional: White title text
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)', // Optional: Black tooltip background
+                        borderColor: '#FFFFFF',
+                        borderWidth: 1
                     }
                 }
-            });
-
-        }
-        // Call the function to initialize the chart
-        initializeChart();
-
-        function previewImage(event) {
-            const reader = new FileReader();
-            const previewBox = document.getElementById('previewBox');
-            const imagePreviewBox = document.getElementById('imagePreviewBox');
-
-            reader.onload = function() {
-                imagePreviewBox.src = reader.result; // Display the selected image
-                previewBox.style.display = 'flex'; // Show the preview box with the Upload button
-            };
-
-            if (event.target.files && event.target.files[0]) {
-                reader.readAsDataURL(event.target.files[0]); // Read the selected file
-            } else {
-                previewBox.style.display = 'none'; // Hide the preview box if no file is selected
             }
+        });
+
+    }
+    // Call the function to initialize the chart
+    initializeChart();
+
+    function previewImage(event) {
+        const reader = new FileReader();
+        const previewBox = document.getElementById('previewBox');
+        const imagePreviewBox = document.getElementById('imagePreviewBox');
+
+        reader.onload = function() {
+            imagePreviewBox.src = reader.result; // Display the selected image
+            previewBox.style.display = 'flex'; // Show the preview box with the Upload button
+        };
+
+        if (event.target.files && event.target.files[0]) {
+            reader.readAsDataURL(event.target.files[0]); // Read the selected file
+        } else {
+            previewBox.style.display = 'none'; // Hide the preview box if no file is selected
         }
+    }
 
-        function moveToDone(taskId) {
-            // Check if the row exists in the View or Processing table
-            let taskRow = document.querySelector(`#task-${taskId}`) || document.querySelector(`#processing-task-${taskId}`);
-            if (!taskRow) return; // Exit if the task row doesn't exist
+    function moveToDone(taskId) {
+        // Check if the row exists in the View or Processing table
+        let taskRow = document.querySelector(`#task-${taskId}`) || document.querySelector(`#processing-task-${taskId}`);
+        if (!taskRow) return; // Exit if the task row doesn't exist
 
-            // Clone the row
-            const doneTableBody = document.querySelector("#doneTasksTable tbody");
-            const newRow = taskRow.cloneNode(true);
+        // Clone the row
+        const doneTableBody = document.querySelector("#doneTasksTable tbody");
+        const newRow = taskRow.cloneNode(true);
 
-            // Update the row's ID for the "Done" table
-            newRow.id = `done-task-${taskId}`;
+        // Update the row's ID for the "Done" table
+        newRow.id = `done-task-${taskId}`;
 
-            // Remove unnecessary buttons
-            const actionsCell = newRow.querySelector("td:last-child");
-            actionsCell.innerHTML = '<a href="delete_task.php?id=' + taskId + '">Delete</a>';
+        // Remove unnecessary buttons
+        const actionsCell = newRow.querySelector("td:last-child");
+        actionsCell.innerHTML = '<a href="delete_task.php?id=' + taskId + '">Delete</a>';
 
-            // Append the row to the Done table
-            doneTableBody.appendChild(newRow);
+        // Append the row to the Done table
+        doneTableBody.appendChild(newRow);
 
-            // Remove the original row
-            taskRow.remove();
+        // Remove the original row
+        taskRow.remove();
 
-            // Update the database status
-            updateStatusInDatabase(taskId, "done");
-        }
+        // Update the database status
+        updateStatusInDatabase(taskId, "done");
+    }
 
-        function moveToProcessing(taskId) {
-            const taskRow = document.querySelector(`#task-${taskId}`);
-            if (!taskRow) return;
+    function moveToProcessing(taskId) {
+        const taskRow = document.querySelector(`#task-${taskId}`);
+        if (!taskRow) return;
 
-            // Clone the row
-            const processingTableBody = document.querySelector("#processingTasksTable tbody");
-            const newRow = taskRow.cloneNode(true);
+        // Clone the row
+        const processingTableBody = document.querySelector("#processingTasksTable tbody");
+        const newRow = taskRow.cloneNode(true);
 
-            // Update the row's ID for the "Processing" table
-            newRow.id = `processing-task-${taskId}`;
+        // Update the row's ID for the "Processing" table
+        newRow.id = `processing-task-${taskId}`;
 
-            // Update buttons
-            const actionsCell = newRow.querySelector("td:last-child");
-            actionsCell.innerHTML = '<button onclick="moveToDone(' + taskId + ')">Done</button>';
+        // Update buttons
+        const actionsCell = newRow.querySelector("td:last-child");
+        actionsCell.innerHTML = '<button onclick="moveToDone(' + taskId + ')">Done</button>';
 
-            // Append the row to the Processing table
-            processingTableBody.appendChild(newRow);
+        // Append the row to the Processing table
+        processingTableBody.appendChild(newRow);
 
-            // Remove the original row
-            taskRow.remove();
+        // Remove the original row
+        taskRow.remove();
 
-            // Update the database status
-            updateStatusInDatabase(taskId, "processing");
-        }
+        // Update the database status
+        updateStatusInDatabase(taskId, "processing");
+    }
 
-        function updateStatusInDatabase(taskId, status) {
-            fetch("update_task_status.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        task_id: taskId,
-                        status: status
-                    }),
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (!data.success) {
-                        console.error(data.message);
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                });
-        }
+    function updateStatusInDatabase(taskId, status) {
+        fetch("update_task_status.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    task_id: taskId,
+                    status: status
+                }),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (!data.success) {
+                    console.error(data.message);
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    }
     </script>
 
 </body>
