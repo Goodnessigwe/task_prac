@@ -119,67 +119,65 @@ h1 {
     <main class="dashboard">
 
         <section class="task-tables">
-
-            <body>
-                <h1>Completed Tasks History</h1>
-                <!-- Clear All Button -->
-                <form action="clear_all_tasks.php" method="POST" style="margin-bottom: 20px;">
-                    <button type="submit" class="action-btn btn-clear-all">Clear All</button>
-                </form>
+            <h1>Completed Tasks History</h1>
+            <!-- Clear All Button -->
+            <form action="clear_all_tasks.php" method="POST" style="margin-bottom: 20px;">
+                <button type="submit" class="action-btn btn-clear-all">Clear All</button>
+            </form>
 
 
-                <table>
+            <table>
 
-                    <thead>
-                        <tr>
-                            <th>Task Name</th>
-                            <th>Created Date</th>
-                            <th>Due Date</th>
-                            <th>Completed Date</th>
-                            <th>Option</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if ($completed_tasks->num_rows > 0): ?>
-                        <?php while ($task = $completed_tasks->fetch_assoc()): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($task['title']) ?></td>
-                            <td>
-                                <?= htmlspecialchars(
-                                            $task['created_date']
-                                                ? date("Y-m-d H:i:s", strtotime($task['created_date']))
-                                                : "N/A"
-                                        ) ?>
-                            </td>
-                            <td>
-                                <?= htmlspecialchars(
-                                            $task['due_date']
-                                                ? date("Y-m-d", strtotime($task['due_date']))
-                                                : "N/A"
-                                        ) ?>
-                            </td>
-                            <td>
-                                <?= htmlspecialchars(
-                                            $task['completed_date']
-                                                ? date("Y-m-d H:i:s", strtotime($task['completed_date']))
-                                                : "N/A"
-                                        ) ?>
-                            </td>
-                            <td>
-                                <!-- Delete Button for Each Task -->
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Created Date</th>
+                        <th>Due Date</th>
+                        <th>Completed Date</th>
+                        <th>Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($completed_tasks->num_rows > 0): ?>
+                    <?php while ($task = $completed_tasks->fetch_assoc()): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($task['title']) ?></td>
+                        <td>
+                            <?= htmlspecialchars(
+                                        $task['created_date']
+                                            ? date("Y-m-d H:i:s", strtotime($task['created_date']))
+                                            : "N/A"
+                                    ) ?>
+                        </td>
+                        <td>
+                            <?= htmlspecialchars(
+                                        $task['due_date']
+                                            ? date("Y-m-d", strtotime($task['due_date']))
+                                            : "N/A"
+                                    ) ?>
+                        </td>
+                        <td>
+                            <?= htmlspecialchars(
+                                        $task['completed_date']
+                                            ? date("Y-m-d H:i:s", strtotime($task['completed_date']))
+                                            : "N/A"
+                                    ) ?>
+                        </td>
+                        <td>
+                            <!-- Delete Button for Each Task -->
 
-                                <a href="delete_task.php?id=<?= htmlspecialchars($task['id']) ?>&page=history.php"
-                                    class="action-btn btn-delete">Delete</a>
+                            <a href="delete_task.php?id=<?= htmlspecialchars($task['id']) ?>&page=history.php"
+                                class="action-btn btn-delete">Delete</a>
 
-                            </td>
-                        </tr>
-                        <?php endwhile; ?>
-                        <?php else: ?>
-                        <tr>
-                            <td colspan="4">No completed tasks found.</td>
-                        </tr>
-                        <?php endif; ?>
-                    </tbody>
+                        </td>
+                    </tr>
+                    <?php endwhile; ?>
+                    <?php else: ?>
+                    <tr>
+                        <td colspan="4">No completed tasks found.</td>
+                    </tr>
+                    <?php endif; ?>
+                </tbody>
 
         </section>
     </main>
